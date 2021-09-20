@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subject Manager</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Subject Manager</h1>
+      <form action="/api/staffmembers" method="post">
+        <h3>Create a Staff  Member</h3>
+        <p><code>POST /api/staffmembers</code></p>
+        <input id="uname" type="text" name="username" placeholder="username" />
+        <input type="submit" value="Submit" />
+      </form>
+      <form id="subject-form" method="post">
+        <h3>Add Subjects</h3>
+        <p><code>POST /api/staffmembers/:username/subjects</code></p>
+        <input id="username" type="text" name="username" placeholder="Staff Member Username" required/>
+        <input id="subjectname" type="text" name="subjectname" placeholder="Subject Name" required/>
+        <input id="subjectcode" type="text" name="subjectcode" placeholder="Subject Code" required/>
+        <input id="professorname" type="text" name="professorname" placeholder="Professor Name" required/>
+        <input type="submit" value="Submit" />
+      </form>
+      <p>
+        <strong>GET subjects: </strong>
+        <code>GET /api/staffmembers/:_id?[sub_name][&sub_code][&prof_name]</code>
+      </p>
+      <p><strong>[ ]</strong> = optional</p>
+      <p><strong>sub_name</strong> = subject name
+      <strong>sub_code</strong> = subject code
+       <strong>prof_name</strong> = professor name</p>
+    </div>
+    <script>
+      const subjectForm = document.getElementById("subject-form");
+
+      subjectForm.addEventListener("submit", () => {
+        const staffUserName = document.getElementById("username").value;
+        subjectForm.action = `/api/staffmembers/${staffUserName}/subjects`;
+
+        subjectForm.submit();
+      });
+    </script>
+  </body>
+</html>
